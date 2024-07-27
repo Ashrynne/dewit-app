@@ -1,6 +1,6 @@
 # To-Do List Web App
 
-A simple, yet effective tool to manage your daily tasks.
+A simple, yet effective tool to manage your daily tasks. Not a final version, features and tweaks will be added in the future
 
 ## Features
 
