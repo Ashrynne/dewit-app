@@ -1,52 +1,59 @@
-document.addEventListener('DOMContentLoaded', function() {
-    loadTasksFromLocalStorage();
-    
-    // Check if tasks exist to set the initial border state
-    if (document.querySelectorAll('.task-item').length > 0) {
-        document.getElementById('taskList').classList.add('has-tasks');
-    }
-});
+// Utility functions for cookies
+function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+}
 
-document.getElementById('addTaskBtn').addEventListener('click', function() {
-    addTask();
-});
+function getCookie(name) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(";").shift());
+    return "";
+}
 
-document.getElementById('taskInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        e.preventDefault(); // Prevent the default action of the Enter key (e.g., form submission)
-        addTask();
-    }
-});
+function deleteCookie(name) {
+    setCookie(name, "", -1);
+}
 
-document.getElementById('taskList').addEventListener('click', function(e) {
-    if (e.target.type === 'checkbox') {
-        e.target.parentElement.querySelector('span').classList.toggle('completed');
-        saveTasksToLocalStorage();
-    } else if (e.target.classList.contains('delete-btn')) {
-        e.target.parentElement.remove();
-        saveTasksToLocalStorage();
+// Save tasks to cookies
+function saveTasksToCookie() {
+    const tasks = [];
+    document.querySelectorAll('.task-item').forEach(item => {
+        tasks.push({
+            text: item.querySelector('span').textContent,
+            completed: item.querySelector('span').classList.contains('completed')
+        });
+    });
+    setCookie('tasks', JSON.stringify(tasks), 7); // Save for 7 days
+}
 
-        // Remove border if there are no tasks
-        if (document.querySelectorAll('.task-item').length === 0) {
-            document.getElementById('taskList').classList.remove('has-tasks');
+// Load tasks from cookies
+function loadTasksFromCookie() {
+    const tasks = JSON.parse(getCookie('tasks') || '[]');
+    const taskList = document.getElementById('taskList');
+    tasks.forEach(task => {
+        const taskItem = document.createElement('li');
+        taskItem.classList.add('task-item');
+        if (task.completed) {
+            taskItem.classList.add('completed');
         }
+        taskItem.innerHTML = `
+            <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
+            <span>${task.text}</span>
+            <button class="delete-btn">Delete</button>
+        `;
+        taskList.appendChild(taskItem);
+    });
+
+    if (tasks.length > 0) {
+        document.getElementById('separator').style.display = 'block';
     }
-});
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadTasksFromLocalStorage();
-
-    // Focus the task input field when the page loads
-    document.getElementById('taskInput').focus();
-
-    // Check if tasks exist to set the initial border state
-    if (document.querySelectorAll('.task-item').length > 0) {
-        document.getElementById('taskList').classList.add('has-tasks');
-    }
-});
-
-
-function addTask() {
+// Add task functionality
+document.getElementById('addTaskBtn').addEventListener('click', function() {
     const taskInput = document.getElementById('taskInput');
     const taskList = document.getElementById('taskList');
 
@@ -55,55 +62,43 @@ function addTask() {
         taskItem.classList.add('task-item');
 
         taskItem.innerHTML = `
-            <input type="checkbox">
+            <input type="checkbox" class="task-checkbox">
             <span>${taskInput.value}</span>
             <button class="delete-btn">Delete</button>
         `;
 
         taskList.appendChild(taskItem);
-
-        saveTasksToLocalStorage();
-
-        // Add border to the task list immediately when a task is added
-        taskList.classList.add('has-tasks');
+        saveTasksToCookie(); // Save to cookie after adding task
 
         taskInput.value = '';
+        document.getElementById('separator').style.display = 'block'; // Show the line
     }
-}
+});
 
-function saveTasksToLocalStorage() {
-    const tasks = [];
-    document.querySelectorAll('.task-item').forEach(item => {
-        tasks.push({
-            text: item.querySelector('span').textContent,
-            completed: item.querySelector('span').classList.contains('completed')
-        });
-    });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-function loadTasksFromLocalStorage() {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const taskList = document.getElementById('taskList');
-    tasks.forEach(task => {
-        const taskItem = document.createElement('li');
-        taskItem.classList.add('task-item');
-        if (task.completed) {
-            taskItem.querySelector('span').classList.add('completed');
-        }
-
-        taskItem.innerHTML = `
-            <input type="checkbox"${task.completed ? ' checked' : ''}>
-            <span>${task.text}</span>
-            <button class="delete-btn">Delete</button>
-        `;
-
-        taskList.appendChild(taskItem);
-    });
-
-    // Set border if tasks exist after loading
-    if (tasks.length > 0) {
-        taskList.classList.add('has-tasks');
+// Handle task completion and deletion
+document.getElementById('taskList').addEventListener('click', function(e) {
+    if (e.target.classList.contains('task-checkbox')) {
+        e.target.nextElementSibling.classList.toggle('completed');
+        saveTasksToCookie(); // Save to cookie after marking as completed
+    } else if (e.target.classList.contains('delete-btn')) {
+        e.target.parentElement.remove();
+        saveTasksToCookie(); // Save to cookie after deleting a task
     }
-}
+});
+
+// Initialize tasks on page load
+document.addEventListener('DOMContentLoaded', loadTasksFromCookie);
+
+// Focus input field on load
+window.addEventListener('load', () => {
+    document.getElementById('taskInput').focus();
+});
+
+// Handle Enter key to add tasks
+document.getElementById('taskInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('addTaskBtn').click();
+    }
+});
 

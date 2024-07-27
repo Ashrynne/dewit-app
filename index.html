@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dewit</title> 
+    <title>Dewit</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <img src="emperor-palpatine.jpg" alt="Emperor Palpatine" id="emperor-img">
+    </header>
     <main>
-        <div id="image-container">
-            <img id="palpatine-img" src="creamy_sheev.jpg" alt="Emperor Palpatine">
+        <h1>Dewit</h1>
+        <div class="task-container">
+            <input type="text" id="taskInput" placeholder="Enter your task">
+            <button id="addTaskBtn">Add Task</button>
+            <hr id="separator">
+            <ul id="taskList"></ul>
         </div>
-        <header>
-            <h1>Dew it!</h1>
-        </header>
-        <input type="text" id="taskInput" placeholder="Add a new task">
-        <button id="addTaskBtn">Add Task</button>
-        <ul id="taskList"></ul>
     </main>
     <script src="script.js"></script>
 </body>
