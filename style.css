@@ -1,80 +1,159 @@
+/* Apply a dark background to the body to match the Pip-Boy theme */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font for a retro look */
+    background-color: #0f0f0f; /* Dark background to enhance the green text effect */
+    color: #00ff00; /* Bright green color for text and borders */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align items to the top of the viewport */
     height: 100vh;
-    background-color: #f4f4f4;
     margin: 0;
+    padding: 20px; /* Additional padding for aesthetics */
+    box-sizing: border-box;
 }
 
+/* Main container styling without outer border */
 main {
-    background: #fff;
+    background: #0c0c0c; /* Slightly lighter than body background */
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    border-radius: 8px; /* Rounded corners */
+    text-align: left; /* Align text to the left */
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%; /* Ensure main takes full width */
+    max-width: 500px; /* Set a maximum width for better presentation */
 }
 
+/* Center the image container */
+#image-container {
+    text-align: center;
+    margin-bottom: 20px; /* Space between image and header */
+}
+
+#palpatine-img {
+    width: 100%;
+    border-radius: 4px; /* Slight border-radius to prevent overflow inside the container */
+    filter: grayscale(100%) sepia(100%) brightness(50%) hue-rotate(85deg) contrast(1.5); /* Monochrome green effect */
+}
+
+/* Center the header content */
 header {
     margin-bottom: 20px;
+    text-align: center; /* Center align header content */
 }
 
-#taskInput {
-    width: 300px;
+h1 {
+    font-size: 24px; /* Adjusted font size for better fit */
+    margin: 0;
+    font-weight: bold; /* Explicitly set bold font weight */
+}
+
+/* Center the input field and button */
+#taskInput, #addTaskBtn {
+    display: block; /* Make them block elements to center */
+    width: calc(100% - 20px); /* Full width minus padding */
+    max-width: 400px; /* Prevent them from stretching too wide */
+    margin: 10px auto; /* Center horizontally and add vertical spacing */
     padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #00ff00; /* Thicker border */
     border-radius: 4px;
-    margin-bottom: 20px; /* Added margin-bottom to create gap between input and header */
+    background-color: #0c0c0c;
+    color: #00ff00;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width */
+    font-size: 16px;
 }
 
 #addTaskBtn {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+    background-color: #0c0c0c;
+    color: #00ff00;
+    border: 2px solid #00ff00; /* Thicker border */
     cursor: pointer;
-    margin-bottom: 20px; /* Added margin-bottom to create gap between button and list */
+    width: auto; /* Width adjusts to fit the text */
+    max-width: 100%; /* Prevent it from stretching beyond container */
 }
 
 #addTaskBtn:hover {
-    background-color: #218838;
+    background-color: #00ff00;
+    color: #0f0f0f;
 }
 
 #taskList {
     list-style-type: none;
     padding: 0;
+    margin-top: 20px;
+    border-top: 2px solid transparent; /* Initial transparent border */
+    transition: border-color 0.1s; /* Smooth transition for border color */
 }
 
+#taskList.has-tasks {
+    border-top: 2px solid #00ff00; /* Thicker border when tasks are present */
+}
+
+/* Task items with flexible layout and text wrapping */
 .task-item {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* Align items to the top */
+    padding: 10px;
+    border-bottom: 2px solid #00ff00; /* Thicker border */
+    background-color: #0c0c0c;
+    color: #00ff00;
+    margin-bottom: 5px; /* Small margin between tasks */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's size */
+    word-wrap: break-word; /* Ensure long text wraps to the next line */
+    overflow: hidden; /* Prevent overflow of long text */
+    flex-wrap: wrap; /* Allow items to wrap if necessary */
 }
 
-.task-item.completed {
-    text-decoration: line-through;
-    color: #aaa;
+/* Checkbox styling */
+.task-item input[type="checkbox"] {
+    width: 24px; /* Size of checkbox */
+    height: 24px; /* Size of checkbox */
+    margin-right: 10px; /* Margin between checkbox and text */
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none; /* Remove default styling */
+    background-color: #0c0c0c; /* Dark background to match the theme */
+    border: 2px solid #00ff00; /* Green border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's size */
 }
 
+/* Checkbox checked state */
+.task-item input[type="checkbox"]:checked {
+    background-color: #00ff00; /* Green background when checked */
+}
+
+/* Remove the default checkbox checkmark */
+.task-item input[type="checkbox"]::after {
+    content: ''; /* No content for a simple fill */
+}
+
+/* Delete button styling */
 .delete-btn {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
+    background-color: #0c0c0c;
+    color: #00ff00;
+    border: 2px solid #00ff00; /* Thicker border */
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 4px;
+    font-size: 14px;
+    margin-left: 10px; /* Margin between task text and delete button */
+    text-decoration: none; /* Remove any text decoration */
+    display: inline-flex; /* Ensure consistent spacing */
+    align-items: center; /* Center the content vertically */
 }
 
-.delete-btn:hover {
-    background-color: #c82333;
+/* Ensure consistent padding and spacing */
+.task-item span {
+    flex-grow: 1; /* Allow the text to take up available space */
+    margin-right: 10px; /* Margin between task text and delete button */
+    overflow-wrap: break-word; /* Ensure text wraps within the span */
+    word-break: break-word; /* Ensure long text breaks properly */
+    max-width: calc(100% - 50px); /* Adjust width to accommodate checkbox and delete button */
 }
 
-.task-item input[type="checkbox"] {
-    margin-right: 10px;
+/* Strikethrough text for completed tasks */
+.task-item span.completed {
+    text-decoration: line-through; /* Apply strikethrough only to the text span */
 }
 
