@@ -8,6 +8,45 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById('addTaskBtn').addEventListener('click', function() {
+    addTask();
+});
+
+document.getElementById('taskInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // Prevent the default action of the Enter key (e.g., form submission)
+        addTask();
+    }
+});
+
+document.getElementById('taskList').addEventListener('click', function(e) {
+    if (e.target.type === 'checkbox') {
+        e.target.parentElement.querySelector('span').classList.toggle('completed');
+        saveTasksToLocalStorage();
+    } else if (e.target.classList.contains('delete-btn')) {
+        e.target.parentElement.remove();
+        saveTasksToLocalStorage();
+
+        // Remove border if there are no tasks
+        if (document.querySelectorAll('.task-item').length === 0) {
+            document.getElementById('taskList').classList.remove('has-tasks');
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadTasksFromLocalStorage();
+
+    // Focus the task input field when the page loads
+    document.getElementById('taskInput').focus();
+
+    // Check if tasks exist to set the initial border state
+    if (document.querySelectorAll('.task-item').length > 0) {
+        document.getElementById('taskList').classList.add('has-tasks');
+    }
+});
+
+
+function addTask() {
     const taskInput = document.getElementById('taskInput');
     const taskList = document.getElementById('taskList');
 
@@ -30,22 +69,7 @@ document.getElementById('addTaskBtn').addEventListener('click', function() {
 
         taskInput.value = '';
     }
-});
-
-document.getElementById('taskList').addEventListener('click', function(e) {
-    if (e.target.type === 'checkbox') {
-        e.target.parentElement.querySelector('span').classList.toggle('completed');
-        saveTasksToLocalStorage();
-    } else if (e.target.classList.contains('delete-btn')) {
-        e.target.parentElement.remove();
-        saveTasksToLocalStorage();
-
-        // Remove border if there are no tasks
-        if (document.querySelectorAll('.task-item').length === 0) {
-            document.getElementById('taskList').classList.remove('has-tasks');
-        }
-    }
-});
+}
 
 function saveTasksToLocalStorage() {
     const tasks = [];

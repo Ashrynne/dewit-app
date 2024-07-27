@@ -63,6 +63,17 @@ h1 {
     font-size: 16px;
 }
 
+/* Remove the default focus styling */
+#taskInput:focus, #addTaskBtn:focus {
+    outline: none; /* Remove the default outline */
+}
+
+/* Add custom focus styling without changing the border */
+#taskInput:focus {
+    border-color: #00ff00; /* Keep border color the same */
+    background-color: #0c0c0c; /* Keep background color the same */
+}
+
 #addTaskBtn {
     background-color: #0c0c0c;
     color: #00ff00;
