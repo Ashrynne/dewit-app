@@ -18,4 +18,3 @@ A simple, yet effective tool to manage your daily tasks.
 ## License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
