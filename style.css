@@ -1,6 +1,6 @@
-/* Apply a dark background to the body to match the Pip-Boy theme */
+/* Apply the default font style */
 body {
-    font-family: 'Courier New', Courier, monospace; /* Monospaced font for a retro look */
+    font-family: Arial, sans-serif; /* Fallback font in case custom font fails to load */
     background-color: #0f0f0f; /* Dark background to enhance the green text effect */
     color: #00ff00; /* Bright green color for text and borders */
     display: flex;
@@ -46,6 +46,7 @@ h1 {
     font-size: 24px; /* Adjusted font size for better fit */
     margin: 0;
     font-weight: bold; /* Explicitly set bold font weight */
+    text-align: center; /* Center align the header */
 }
 
 /* Center the input field and button */
@@ -103,7 +104,7 @@ h1 {
 /* Task items with flexible layout and text wrapping */
 .task-item {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
+    align-items: center; /* Vertically align items to the center */
     padding: 10px;
     border-bottom: 2px solid #00ff00; /* Thicker border */
     background-color: #0c0c0c;
