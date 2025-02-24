@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     loadTasksFromLocalStorage();
-    
+
+    // Focus the task input field when the page loads
+    document.getElementById('taskInput').focus();
+
     // Check if tasks exist to set the initial border state
     if (document.querySelectorAll('.task-item').length > 0) {
         document.getElementById('taskList').classList.add('has-tasks');
@@ -13,7 +16,7 @@ document.getElementById('addTaskBtn').addEventListener('click', function() {
 
 document.getElementById('taskInput').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
-        e.preventDefault(); // Prevent the default action of the Enter key (e.g., form submission)
+        e.preventDefault(); // Prevent default action (e.g., form submission)
         addTask();
     }
 });
@@ -32,19 +35,6 @@ document.getElementById('taskList').addEventListener('click', function(e) {
         }
     }
 });
-
-document.addEventListener('DOMContentLoaded', function() {
-    loadTasksFromLocalStorage();
-
-    // Focus the task input field when the page loads
-    document.getElementById('taskInput').focus();
-
-    // Check if tasks exist to set the initial border state
-    if (document.querySelectorAll('.task-item').length > 0) {
-        document.getElementById('taskList').classList.add('has-tasks');
-    }
-});
-
 
 function addTask() {
     const taskInput = document.getElementById('taskInput');
@@ -89,11 +79,11 @@ function loadTasksFromLocalStorage() {
         const taskItem = document.createElement('li');
         taskItem.classList.add('task-item');
         if (task.completed) {
-            taskItem.querySelector('span').classList.add('completed');
+            taskItem.classList.add('completed');
         }
 
         taskItem.innerHTML = `
-            <input type="checkbox"${task.completed ? ' checked' : ''}>
+            <input type="checkbox" ${task.completed ? 'checked' : ''}>
             <span>${task.text}</span>
             <button class="delete-btn">Delete</button>
         `;
