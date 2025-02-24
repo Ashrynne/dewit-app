@@ -1,80 +1,170 @@
+/* Apply the default font style */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Fallback font */
+    background-color: #0f0f0f; /* Dark background */
+    color: #00ff00; /* Bright green text */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
-    background-color: #f4f4f4;
     margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
+/* Main container styling without outer border */
 main {
-    background: #fff;
+    background: #0c0c0c;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: left;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
 }
 
-header {
+/* Center the image container */
+#image-container {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-#taskInput {
-    width: 300px;
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
+#palpatine-img {
+    width: 100%;
     border-radius: 4px;
-    margin-bottom: 20px; /* Added margin-bottom to create gap between input and header */
+    filter: grayscale(100%) sepia(100%) brightness(50%) hue-rotate(85deg) contrast(1.5);
+}
+
+/* Center the header content */
+header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Center the input field and button */
+#taskInput, #addTaskBtn {
+    display: block;
+    width: calc(100% - 20px);
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 2px solid #00ff00;
+    border-radius: 4px;
+    background-color: #0c0c0c;
+    color: #00ff00;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Remove the default focus styling */
+#taskInput:focus, #addTaskBtn:focus {
+    outline: none;
+}
+
+#taskInput:focus {
+    border-color: #00ff00;
+    background-color: #0c0c0c;
 }
 
 #addTaskBtn {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+    background-color: #0c0c0c;
+    color: #00ff00;
+    border: 2px solid #00ff00;
     cursor: pointer;
-    margin-bottom: 20px; /* Added margin-bottom to create gap between button and list */
+    width: auto;
+    max-width: 100%;
 }
 
 #addTaskBtn:hover {
-    background-color: #218838;
+    background-color: #00ff00;
+    color: #0f0f0f;
 }
 
 #taskList {
     list-style-type: none;
     padding: 0;
+    margin-top: 20px;
+    border-top: 2px solid transparent;
+    transition: border-color 0.1s;
 }
 
+#taskList.has-tasks {
+    border-top: 2px solid #00ff00;
+}
+
+/* Task items with flexible layout and text wrapping */
 .task-item {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    padding: 10px;
+    border-bottom: 2px solid #00ff00;
+    background-color: #0c0c0c;
+    color: #00ff00;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow: hidden;
+    flex-wrap: wrap;
 }
 
-.task-item.completed {
-    text-decoration: line-through;
-    color: #aaa;
+/* Checkbox styling */
+.task-item input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #0c0c0c;
+    border: 2px solid #00ff00;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
 }
 
+/* Checkbox checked state */
+.task-item input[type="checkbox"]:checked {
+    background-color: #00ff00;
+}
+
+/* Remove the default checkbox checkmark */
+.task-item input[type="checkbox"]::after {
+    content: '';
+}
+
+/* Delete button styling */
 .delete-btn {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
+    background-color: #0c0c0c;
+    color: #00ff00;
+    border: 2px solid #00ff00;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 4px;
+    font-size: 14px;
+    margin-left: 10px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
 }
 
-.delete-btn:hover {
-    background-color: #c82333;
-}
-
-.task-item input[type="checkbox"] {
+/* Ensure consistent padding and spacing */
+.task-item span {
+    flex-grow: 1;
     margin-right: 10px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: calc(100% - 50px);
+}
+
+/* Strikethrough text for completed tasks */
+.task-item span.completed {
+    text-decoration: line-through;
 }
 
