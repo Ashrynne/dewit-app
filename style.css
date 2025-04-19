@@ -1,144 +1,141 @@
-/* ===== Base Layout ===== */
 body {
-    background-color: #111;
-    color: #0f0;
-    font-family: monospace;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+  background-color: #000000;
+  color: #0f0;
+  font-family: monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
-/* ===== Heading ===== */
 h1 {
-    text-align: center;
-    font-size: 1.8rem;
-    margin: 20px 0;
+  text-align: center;
+  font-size: 20px;
+  font-style: italic;
+  margin: 20px 0;
+  border: 2px dotted;
+  padding: 0 10px;
 }
 
-/* ===== Image Container ===== */
 #image-container {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: px;
 }
 
 #palpatine-img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 4px;
-    filter: grayscale(100%) sepia(100%) brightness(50%) hue-rotate(85deg) contrast(1.5);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 4px;
+  filter: grayscale(100%) sepia(100%) brightness(50%) hue-rotate(85deg) contrast(1.5);
 }
 
-/* ===== Input and Button Row ===== */
 #taskInputContainer {
-    display: flex;
-    justify-content: flex-end; /* move input + button to the right */
-    align-items: center;
-    width: 100%;
-    max-width: 750px;
-    gap: 10px;
-    padding: 0 2rem;
-    margin-top: 20px;
-    margin-left: 35px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 50px;
+  transform: translateX(-15px);
+  padding: 0 2rem;
+  gap: 10px;
 }
-/* ===== Input Field ===== */
+
 #taskInput {
-    flex: 1;
-    padding: 10px;
-    border: 2px solid #0f0;
-    background-color: #000;
-    color: #0f0;
-    font-family: monospace;
-    font-size: 16px;
-    height: 42px;
-    box-sizing: border-box;
-    outline: none;
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #0f0;
+  background-color: #000;
+  color: #0f0;
+  font-family: monospace;
+  font-size: 20px;
+  height: 42px;
+  box-sizing: border-box;
+  outline: none;
+  max-width: 600px;
 }
 
-/* ===== Add Button ===== */
 button {
-    padding: 10px 20px;
-    border: 2px solid #0f0;
-    background-color: #000;
-    color: #0f0;
-    cursor: pointer;
-    font-family: monospace;
-    font-size: 16px;
-    height: 42px;
+  padding: 5px 20px;
+  border: 2px solid #0f0;
+  background-color: #000;
+  color: #0f0;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 20px;
+  height: 42px;
+  font-weight: bold;
 }
 
-/* ===== Task List Container ===== */
 #taskList {
-    margin-top: 30px;
-    width: 90%;
-    max-width: 700px;
+  margin-top: 30px;
+  width: 90%;
+  max-width: 700px;
 }
 
-/* ===== Task Item Layout ===== */
 .task-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border: 2px solid #0f0;
-    padding: 10px;
-    margin-bottom: 10px;
-    gap: 10px;
-    word-wrap: break-word;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #0f0;
+  padding: 10px;
+  margin-bottom: 15px;
+  gap: 10px;
+  word-wrap: break-word;
 }
 
-/* ===== Task Left: Checkbox + Text ===== */
 .task-left {
-    display: flex;
-    flex: 1;
-    align-items: flex-start;
-    gap: 10px;
-    word-break: break-word;
-    flex-wrap: wrap;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  word-break: break-word;
+  flex-wrap: wrap;
 }
 
-/* ===== Checkbox Style ===== */
 .task-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin-top: 3px;
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: #000;
-    border: 2px solid #0f0;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #000;
+  border: 2px solid #0f0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .task-item input[type="checkbox"]:checked {
-    background-color: #0f0;
+  background-color: #0f0;
 }
 
-/* ===== Task Text ===== */
 .task-item span {
-    flex: 1;
-    font-size: 16px;
-    line-height: 1.4;
-    word-break: break-word;
+  flex: 1;
+  font-size: 20px;
+  line-height: 1.4;
+  word-break: break-word;
 }
 
 .task-item span.completed {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
-/* ===== Delete Button ===== */
 .delete-btn {
-    background-color: transparent;
-    border: 2px solid #0f0;
-    color: #0f0;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-family: monospace;
-    white-space: nowrap;
-    height: fit-content;
-    align-self: flex-start;
+  background-color: transparent;
+  border: 2px solid #0f0;
+  color: #0f0;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: monospace;
+  white-space: nowrap;
+  height: fit-content;
+  align-self: center;
+  font-weight: bold;
 }
 
