@@ -35,10 +35,11 @@ h1 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  transform: translateX(-66px);
-  width: 100%;
+  /* transform: translateX(-66px); */
+  padding-right: 
+  width: 90%;
   font-weight: bold;
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 0 2rem;
   gap: 10px;
@@ -83,6 +84,8 @@ button {
   border: 2px solid #0f0;
   padding: 10px;
   margin-bottom: 10px;
+  width: 90%;
+  max-width: 700px;
   gap: 10px;
   word-wrap: break-word;
 }
